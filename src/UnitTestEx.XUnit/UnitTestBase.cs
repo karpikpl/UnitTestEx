@@ -46,13 +46,13 @@ namespace UnitTestEx.Xunit
         /// <param name="includeUnitTestConfiguration">Indicates whether to include '<c>appsettings.unittest.json</c>' configuration file.</param>
         /// <param name="includeUserSecrets">Indicates whether to include user secrets.</param>
         /// <param name="additionalConfiguration">Additional configuration values to add/override.</param>
-        protected FunctionTester<TEntryPoint> CreateFunctionTester<TEntryPoint>(bool? includeUnitTestConfiguration = null, bool? includeUserSecrets = null, IEnumerable<KeyValuePair<string, string>>? additionalConfiguration = null)
+        protected FunctionTester<TEntryPoint> CreateFunctionTester<TEntryPoint>(bool? includeUnitTestConfiguration = null, bool? includeUserSecrets = null, params KeyValuePair<string, string>[] additionalConfiguration)
             where TEntryPoint : FunctionsStartup, new()
             => new(Output, includeUnitTestConfiguration, includeUserSecrets, additionalConfiguration);
 
         /// <summary>
-        /// Gets the <see cref="Xunit.ObjectComparer"/>.
+        /// Gets the <see cref="UnitTestEx.Xunit.ObjectComparer"/>.
         /// </summary>
-        protected ObjectComparer ObjectComparer => new(new XunitTestImplementor(Output));
+        protected UnitTestEx.Xunit.ObjectComparer ObjectComparer => new UnitTestEx.Xunit.ObjectComparer(new XunitTestImplementor(Output));
     }
 }
